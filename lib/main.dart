@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import '/providers/functions.dart';
 import 'package:provider/provider.dart';
 import '/services/episodes_service.dart';
 import '/services/trend_service.dart';
 import 'screens/home.dart';
 
-void main() {
+Future<void> main() async {
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
   runApp(
     MultiProvider(
       providers: [
@@ -17,6 +23,18 @@ void main() {
     ),
   );
 }
+// void main() {
+//   runApp(
+//     MultiProvider(
+//       providers: [
+//         ChangeNotifierProvider(create: (_) => TrendProvider()),
+//         ChangeNotifierProvider(create: (_) => FunctionProvider()),
+//         ChangeNotifierProvider(create: (_) => EpisodeProvider()),
+//       ],
+//       child: MyApp(),
+//     ),
+//   );
+// }
 
 class MyApp extends StatelessWidget {
   @override

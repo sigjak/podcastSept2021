@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'package:podcasts/audio/slider_bar.dart';
 import 'package:flutter/services.dart';
 
@@ -36,10 +37,11 @@ class _EpisodesState extends State<Episodes> with WidgetsBindingObserver {
     super.initState();
     isSelected = widget.index;
     WidgetsBinding.instance?.addObserver(this);
-    _initAudio(epi.items[widget.index].enclosureUrl!);
+    _initAudio(
+        epi.items[widget.index].enclosureUrl!, epi.items[widget.index].title!);
   }
 
-  Future<void> _initAudio(String podcastUrl) async {
+  Future<void> _initAudio(String podcastUrl, String title) async {
     _audioSource = LockCachingAudioSource(Uri.parse(podcastUrl));
     final session = await AudioSession.instance;
     await session.configure(AudioSessionConfiguration.speech());
@@ -49,7 +51,9 @@ class _EpisodesState extends State<Episodes> with WidgetsBindingObserver {
     });
     // Try to load audio from a source and catch any errors.
     try {
-      await _audioPlayer.setAudioSource(AudioSource.uri(Uri.parse(podcastUrl)));
+      AudioSource audioSource = AudioSource.uri(Uri.parse(podcastUrl),
+          tag: MediaItem(id: '1', title: title));
+      await _audioPlayer.setAudioSource(audioSource);
       _audioPlayer.play();
     } catch (e) {
       print('Error loading audiosource');
@@ -197,7 +201,8 @@ class _EpisodesState extends State<Episodes> with WidgetsBindingObserver {
                               isSelected = podIndex;
                               episodeName = episode.title!;
                             });
-                            await _initAudio(episode.enclosureUrl!);
+                            await _initAudio(
+                                episode.enclosureUrl!, episode.title!);
                           },
                           child: ListTile(
                             dense: true,

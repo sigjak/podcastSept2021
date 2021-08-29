@@ -14,30 +14,30 @@ class FunctionProvider with ChangeNotifier {
   // }
 
   // Chunk function
-  List<List<Feed>> chunk(List<Feed> list, int chunks) {
-    List<List<Feed>> chunked = [];
-    int vectLength = list.length;
-    int steps = (vectLength / chunks).floor();
-    int start = 0;
-    int rem = vectLength - steps * chunks;
-    int nextIndex = vectLength - rem;
+  // List<List<Feed>> chunk(List<Feed> list, int chunks) {
+  //   List<List<Feed>> chunked = [];
+  //   int vectLength = list.length;
+  //   int steps = (vectLength / chunks).floor();
+  //   int start = 0;
+  //   int rem = vectLength - steps * chunks;
+  //   int nextIndex = vectLength - rem;
 
-    for (int i = 0; i < steps; i++) {
-      var temp = list.getRange(start, start + chunks);
-      start = start + chunks; //4
-      chunked.add(temp.toList());
-    }
+  //   for (int i = 0; i < steps; i++) {
+  //     var temp = list.getRange(start, start + chunks);
+  //     start = start + chunks; //4
+  //     chunked.add(temp.toList());
+  //   }
 
-    if (rem > 0) {
-      List<Feed> left = [];
-      for (int i = nextIndex; i < vectLength; i++) {
-        left.add(list[i]);
-      }
-      chunked.add(left);
-    }
+  //   if (rem > 0) {
+  //     List<Feed> left = [];
+  //     for (int i = nextIndex; i < vectLength; i++) {
+  //       left.add(list[i]);
+  //     }
+  //     chunked.add(left);
+  //   }
 
-    return chunked;
-  }
+  //   return chunked;
+  // }
 
   Future loadImages(List<Feed> someTrend, context) async {
     isLoading = true;
@@ -47,27 +47,11 @@ class FunctionProvider with ChangeNotifier {
 
     isLoading = false;
     notifyListeners();
-    print('done');
+    // print('done');
   }
 
   Future cacheImage(context, url) => precacheImage(
         CachedNetworkImageProvider(url, maxWidth: 120),
         context,
       );
-//  --------------Audio helpers
-
-  // Future<void> initAudio(AudioPlayer player, String podcastUrl) async {
-  //   final session = await AudioSession.instance;
-  //   await session.configure(AudioSessionConfiguration.speech());
-  //   player.playbackEventStream.listen((event) {},
-  //       onError: (Object e, StackTrace stackTrace) {
-  //     print('A stream eerror ocurred: $e');
-  //   });
-  //   // Try to load audio from a source and catch any errors.
-  //   try {
-  //     await player.setAudioSource(AudioSource.uri(Uri.parse(podcastUrl)));
-  //   } catch (e) {
-  //     print('Error loading audiosource');
-  //   }
-  // }
 }
