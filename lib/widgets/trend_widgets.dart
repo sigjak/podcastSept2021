@@ -42,7 +42,7 @@ class EpisodeWidget extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.fromLTRB(32, 4, 32, 4),
             child: Container(
-              height: 60,
+              height: 100,
               child: Card(
                 color: Colors.grey[700],
                 elevation: 5,

@@ -62,7 +62,7 @@ class _HomeState extends State<Home> {
       appBar: AppBar(
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.fromLTRB(2, 12, 2, 12),
             child: ToggleButtons(
               color: Colors.white,
               splashColor: Colors.white,
@@ -102,6 +102,8 @@ class _HomeState extends State<Home> {
                     trendText: trendName!, displayTrends: categoryTrends),
                 Text(
                   epis.podcastName,
+                  maxLines: 1,
+                  textAlign: TextAlign.center,
                   style: TextStyle(fontFamily: 'MonteCarlo', fontSize: 24),
                 ),
                 Expanded(

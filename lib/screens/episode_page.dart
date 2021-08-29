@@ -171,7 +171,7 @@ class _EpisodesState extends State<Episodes> with WidgetsBindingObserver {
             ),
           ),
           SliverFixedExtentList(
-            itemExtent: 80.0,
+            itemExtent: 100.0,
             delegate: SliverChildBuilderDelegate(
               (context, podIndex) {
                 final episode = epis.items[podIndex];
@@ -185,7 +185,7 @@ class _EpisodesState extends State<Episodes> with WidgetsBindingObserver {
                             borderRadius: BorderRadius.circular(10),
                           )
                         : null,
-                    height: 80,
+                    height: 100,
                     child: Card(
                       color: Colors.grey.shade600,
                       elevation: 5,
@@ -212,18 +212,6 @@ class _EpisodesState extends State<Episodes> with WidgetsBindingObserver {
                               Bidi.stripHtmlIfNeeded(episode.description!),
                               style: TextStyle(),
                             ),
-                            // trailing: IconButton(
-                            //   onPressed: () async {
-                            //     await initAudio(episode.enclosureUrl!);
-                            //     setState(() {
-                            //       _audioPlayer.stop();
-                            //       _audioPlayer.play();
-                            //       isSelected = podIndex;
-                            //       episodeName = episode.title!;
-                            //     });
-                            //   },
-                            //   icon: Icon(Icons.play_circle),
-                            // ),
                           ),
                         ),
                       ),
