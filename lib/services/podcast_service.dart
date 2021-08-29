@@ -15,6 +15,7 @@ class PodcastProvider with ChangeNotifier {
       var podcasts = podcastsFromJson(response.body);
       podcastList = podcasts.feeds;
       print(podcastList![0].title);
+      print(podcastList![0].description);
     } else {
       print(response.statusCode);
     }

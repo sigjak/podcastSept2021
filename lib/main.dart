@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:just_audio_background/just_audio_background.dart';
-import '/providers/functions.dart';
 import 'package:provider/provider.dart';
+
+import '/providers/functions.dart';
 import '/services/episodes_service.dart';
 import '/services/trend_service.dart';
-import 'screens/home.dart';
+import '/services/podcast_service.dart';
+//import 'screens/home.dart';
+import 'screens/my_test.dart';
 
 Future<void> main() async {
   await JustAudioBackground.init(
@@ -18,6 +21,7 @@ Future<void> main() async {
         ChangeNotifierProvider(create: (_) => TrendProvider()),
         ChangeNotifierProvider(create: (_) => FunctionProvider()),
         ChangeNotifierProvider(create: (_) => EpisodeProvider()),
+        ChangeNotifierProvider(create: (_) => PodcastProvider()),
       ],
       child: MyApp(),
     ),
@@ -47,7 +51,8 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.amber.shade600,
         ),
         routes: {
-          '/': (context) => Home(),
+          '/': (context) => MyTest(),
+          //'/': (context) => Home(),
           // Episodes.routeName: (context) => Episodes(Object),
         });
   }
