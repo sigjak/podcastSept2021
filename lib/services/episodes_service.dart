@@ -10,7 +10,7 @@ class EpisodeProvider with ChangeNotifier {
 
   Future<void> getEpisodes(int feedID) async {
     var baseUrl =
-        'https://api.podcastindex.org/api/1.0/episodes/byfeedid?max=10&id=';
+        'https://api.podcastindex.org/api/1.0/episodes/byfeedid?max=15&id=';
     var url = Uri.parse(baseUrl + feedID.toString());
     var headers = prepHeaders();
     final response = await http.get(url, headers: headers);
@@ -29,7 +29,7 @@ class EpisodeProvider with ChangeNotifier {
       // print(items[0].datePublished);
 
       notifyListeners();
-      print(items.length);
+      // print(items.length);
     } else {
       print('Error');
     }
